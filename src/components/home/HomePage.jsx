@@ -4,8 +4,10 @@ import FeaturedProducts from "./FeaturedProducts";
 const HomePage = () => {
   return (
     <>
-      <Banner />
-      <FeaturedProducts />
+      <div className="wrapper">
+        <Banner />
+        <FeaturedProducts />
+      </div>
     </>
   );
 };

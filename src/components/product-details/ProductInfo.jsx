@@ -11,31 +11,31 @@ const ProductInfo = ({ prodInfo, isPending }) => {
   }, [quantity]);
 
   const handleIncrement = useCallback(() => {
-    quantity < prodInfo.stock
+    quantity < prodInfo?.stock
       ? setQuantity(quantity + 1)
-      : setQuantity(prodInfo.stock);
+      : setQuantity(prodInfo?.stock);
   }, [prodInfo?.stock, quantity]);
   return (
     <>
       {!isPending && prodInfo ? (
         <div className="flex flex-col items-center md:items-start justify-center gap-2">
-          <h2 className="font-extrabold text-xl">{prodInfo.title}</h2>
+          <h2 className="font-extrabold text-xl">{prodInfo?.title}</h2>
           <p>
-            <Rating defaultValue={prodInfo.rating} precision={0.5} readOnly />
+            <Rating defaultValue={prodInfo?.rating} precision={0.5} readOnly />
           </p>
           <p className="font-bold">
-            MRP: {priceFormat().format(prodInfo.price * 80)}
+            MRP: {priceFormat().format(prodInfo?.price * 80)}
           </p>
-          <p>{prodInfo.description}</p>
+          <p>{prodInfo?.description}</p>
           <div className="text-sm flex flex-col items-start justify-center gap-1 mt-1">
             <p>
               Available:{" "}
               <span className="font-bold">
-                {prodInfo.stock > 0 ? "In Stock" : "Not Available"}
+                {prodInfo?.stock > 0 ? "In Stock" : "Not Available"}
               </span>
             </p>
             <p>
-              Brand: <span className="font-bold">{prodInfo.brand}</span>
+              Brand: <span className="font-bold">{prodInfo?.brand}</span>
             </p>
           </div>
           <div>

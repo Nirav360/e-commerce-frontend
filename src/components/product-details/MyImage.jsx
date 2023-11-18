@@ -15,7 +15,7 @@ const MyImage = ({ imgs, isPending }) => {
                     <figure>
                       <img
                         src={element}
-                        alt={imgs.title}
+                        alt={imgs?.title}
                         style={{
                           height: 100,
                           width: 150,
@@ -46,7 +46,7 @@ const MyImage = ({ imgs, isPending }) => {
             <Skeleton variant="rounded" width={400} height={150} />
           ) : (
             <img
-              src={selectedImage ? selectedImage : imgs?.images[0]}
+              src={selectedImage ? selectedImage : imgs?.images ? imgs?.images[0] : null}
               alt={imgs?.title}
               width={400}
               height={150}

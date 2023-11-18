@@ -5,7 +5,8 @@ import ProductsList from "./ProductsList";
 const ProductsPage = () => {
   return (
     <>
-      <div className="w-11/12 container mx-auto border grid grid-cols-5 gap-2">
+    <div className="wrapper">
+      <div className="border grid grid-cols-5 gap-2">
         <div className="col-span-1">
           <FilterSection />
         </div>
@@ -17,6 +18,7 @@ const ProductsPage = () => {
             <ProductsList />
           </div>
         </section>
+      </div>
       </div>
     </>
   );

@@ -31,7 +31,8 @@ body::-webkit-scrollbar-thumb {
 
 .image {
   background-image: url("./assets/banner.jpg");
-  background-size: cover; /* or "contain" depending on what you want */
+  background-size: cover;
+  /* or "contain" depending on what you want */
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -45,4 +46,17 @@ body::-webkit-scrollbar-thumb {
   font-size: 20px;
   font-weight: bolder;
   width: 150px;
+}
+
+.wrapper {
+  width: min(100%, 100% - 2rem);
+  display: block;
+  margin-inline: auto;
+}
+
+.card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
