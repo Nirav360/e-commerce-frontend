@@ -1,72 +1,34 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
-import axios from "axios";
+import { createContext, useEffect, useReducer } from "react";
 import reducer from "../reducer/productReducer";
+import { useGetProductsQuery } from "../services/commonApi";
 
 const ProductContext = createContext();
 
-const API = "https://dummyjson.com/products";
-
 const initialState = {
-  isLoading: false,
-  isError: false,
   products: [],
-  featureProducts: [],
-  isSingleLoading: false,
-  singleProduct: {},
+  isLoading: false,
+  trendingProducts: [],
 };
 
 const ProductProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const getProducts = async (url) => {
-    dispatch({ type: "SET_LOADING" });
-    try {
-      const res = await axios.get(url);
-      const products = await res.data.products;
-      dispatch({ type: "SET_API_DATA", payload: products });
-    } catch (error) {
-      dispatch({ type: "API_ERROR" });
-    }
-  };
-
-  // my 2nd api call for single product
-
-  const getSingleProduct = async (url) => {
-    dispatch({ type: "SET_SINGLE_LOADING" });
-    try {
-      const res = await axios.get(url);
-      const singleProduct = await res.data;
-      dispatch({ type: "SET_SINGLE_PRODUCT", payload: singleProduct });
-    } catch (error) {
-      dispatch({ type: "SET_SINGLE_ERROR" });
-    }
-  };
-
-  // const getFeaturedProduct = async (url) => {
-  //   dispatch({ type: "SET_LOADING" });
-  //   try {
-  //     const res = await axios.get(`${url}?limit=5`);
-  //     const featuredProduct = await res.data;
-  //     dispatch({ type: "SET_FEATURED_PRODUCT", payload: featuredProduct });
-  //   } catch (error) {
-  //     dispatch({ type: "API_ERROR" });
-  //   }
-  // };
+  const { data, isFetching } = useGetProductsQuery();
 
   useEffect(() => {
-    getProducts(API);
-  }, []);
+    dispatch({ type: "SET_LOADING", payload: isFetching });
+    if (data?.products?.length > 0) {
+      dispatch({
+        type: "SET_PRODUCTS",
+        payload: data.products,
+      });
+    }
+  }, [data, isFetching]);
 
   return (
-    <ProductContext.Provider value={{ ...state, getSingleProduct }}>
+    <ProductContext.Provider value={{ ...state }}>
       {children}
     </ProductContext.Provider>
   );
 };
 
-// custom hooks
-const useProductContext = () => {
-  return useContext(ProductContext);
-};
-
-export { ProductProvider, ProductContext, useProductContext };
+export { ProductProvider, ProductContext };

@@ -2,9 +2,9 @@ import { createTheme } from "@mui/material";
 
 export const customTheme = createTheme({
   components: {
-    MuiCard: { styleOverrides: { root: { borderRadius: 16 } } },
+    MuiCard: { styleOverrides: { root: { borderRadius: 8 } } },
     MuiButton: {
-      styleOverrides: { root: { borderRadius: 16, textTransform: "none" } },
+      styleOverrides: { root: { borderRadius: 8, textTransform: "none" } },
     },
     MuiFormLabel: {
       styleOverrides: {
@@ -14,7 +14,7 @@ export const customTheme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: 16,
+          borderRadius: 8,
         },
       },
     },

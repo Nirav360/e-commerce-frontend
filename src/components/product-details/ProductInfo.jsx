@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { priceFormat } from "../../utils/PriceFormat";
 import { Rating, Skeleton } from "@mui/material";
 import QuantityToggle from "./QuantityToggle";

@@ -6,7 +6,9 @@ const HomePage = () => {
     <>
       <div className="wrapper">
         <Banner />
-        <FeaturedProducts />
+        <div className="mx-8">
+          <FeaturedProducts />
+        </div>
       </div>
     </>
   );
