@@ -7,7 +7,7 @@ const FeaturedProducts = () => {
     <>
       {isLoading && <p>Loading...</p>}
       <h1 className="text-4xl font-extrabold mx-6 my-4">Trending Products</h1>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
+      <div className="grid-container my-4">
         {trendingProducts.length > 0 &&
           trendingProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
