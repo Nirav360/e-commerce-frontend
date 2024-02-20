@@ -9,7 +9,8 @@ const ProductsPage = () => {
   const { data, isFetching } = useGetProductCategoriesQuery();
   const [checked, setChecked] = useState(null);
   const [categorySelected, setCategorySelected] = useState("");
-  const { getProductsByCategory } = useFetchProductByCategory();
+  const { getProductsByCategory, isFetching: fetchProdByCategory } =
+    useFetchProductByCategory();
 
   const onChange = useCallback(
     (index) => {
@@ -39,12 +40,16 @@ const ProductsPage = () => {
           />
         </div>
         <section className="col-span-4">
-          <div className="flex flex-col gap-4 mx-2">
+          <div className="flex flex-col gap-2 mx-2">
             <div>
               <SortingSection category={categorySelected} />
             </div>
             <div>
-              <ProductsList category={categorySelected} />
+              {fetchProdByCategory ? (
+                <p>Loading...</p>
+              ) : (
+                <ProductsList category={categorySelected} />
+              )}
             </div>
           </div>
         </section>

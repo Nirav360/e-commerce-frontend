@@ -8,6 +8,7 @@ const initialState = {
   products: [],
   isLoading: false,
   trendingProducts: [],
+  filterCategory: [],
 };
 
 const ProductProvider = ({ children }) => {
@@ -25,7 +26,7 @@ const ProductProvider = ({ children }) => {
   }, [data, isFetching]);
 
   return (
-    <ProductContext.Provider value={{ ...state }}>
+    <ProductContext.Provider value={{ ...state, dispatch }}>
       {children}
     </ProductContext.Provider>
   );

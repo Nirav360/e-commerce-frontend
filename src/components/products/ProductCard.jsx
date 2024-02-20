@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { priceFormat } from "../../utils/PriceFormat";
 import { useNavigate } from "react-router-dom";
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const ProductCard = ({ product }) => {
           </div>
         </CardContent>
         <CardActions className="card-btn" onClick={null}>
-          <p className="font-bold">Add to Cart</p>
+        <ShoppingCartRoundedIcon /><p className="font-bold">Add to Cart</p>
         </CardActions>
       </Card>
     </>

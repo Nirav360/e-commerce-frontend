@@ -16,6 +16,16 @@ const ProductReducer = (state, action) => {
         isLoading: action.payload,
       };
     }
+    case "SET_FILTER_CATEGORY":
+      return {
+        ...state,
+        filterCategory: action.payload,
+      };
+    case "FILTER_CATEGORY_RESET":
+      return {
+        ...state,
+        filterCategory: [],
+      };
     default:
       return state;
   }

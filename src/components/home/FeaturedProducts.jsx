@@ -6,7 +6,7 @@ const FeaturedProducts = () => {
   return (
     <>
       {isLoading && <p>Loading...</p>}
-      <h1 className="text-4xl font-extrabold mx-6 my-4">Trending Products</h1>
+      <h1 className="md:text-4xl text-2xl font-extrabold mx-6 my-4">Trending Products</h1>
       <div className="grid-container my-4">
         {trendingProducts.length > 0 &&
           trendingProducts.map((product) => (

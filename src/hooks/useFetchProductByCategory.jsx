@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetProductsByCategoryQuery } from "../services/commonApi";
+import useProductContext from "./useProductContext";
 
 const useFetchProductByCategory = () => {
   const [isSkip, setIsSkip] = useState(true);
@@ -7,15 +8,25 @@ const useFetchProductByCategory = () => {
   const { data, isFetching } = useGetProductsByCategoryQuery(category, {
     skip: isSkip,
   });
+  const { dispatch } = useProductContext();
 
   const getProductsByCategory = (selectedCategory) => {
     if (!selectedCategory) {
+      dispatch({ type: "FILTER_CATEGORY_RESET" });
       return;
     }
-    setIsSkip(false);
     setCategory(selectedCategory);
+    setIsSkip(false);
   };
-  return { getProductsByCategory, data, isFetching };
+
+  useEffect(() => {
+    if (data) {
+      dispatch({ type: "SET_FILTER_CATEGORY", payload: data.products });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  return { getProductsByCategory, isFetching };
 };
 
 export default useFetchProductByCategory;

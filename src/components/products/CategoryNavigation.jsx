@@ -4,8 +4,8 @@ const CategoryNavigation = ({ category }) => {
   return (
     <>
       <Breadcrumbs aria-label="breadcrumb">
-        <Typography color="text.primary">Products</Typography>
-        {category && <Typography color="text.primary">{category}</Typography>}
+        <Typography color="text.primary" sx={{fontSize: 18, fontWeight: "bold"}}>Products</Typography>
+        {category && <Typography color="text.primary" sx={{fontSize: 18, fontWeight: "bold"}}>{category}</Typography>}
       </Breadcrumbs>
     </>
   );
