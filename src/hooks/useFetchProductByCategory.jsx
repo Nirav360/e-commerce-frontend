@@ -8,11 +8,11 @@ const useFetchProductByCategory = () => {
   const { data, isFetching } = useGetProductsByCategoryQuery(category, {
     skip: isSkip,
   });
-  const { dispatch } = useProductContext();
+  const { dispatch, filterProductReset } = useProductContext();
 
   const getProductsByCategory = (selectedCategory) => {
     if (!selectedCategory) {
-      dispatch({ type: "FILTER_CATEGORY_RESET" });
+      filterProductReset();
       return;
     }
     setCategory(selectedCategory);

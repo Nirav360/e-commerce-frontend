@@ -47,9 +47,9 @@ const ProductCard = ({ product }) => {
           <p className="text-lg">{priceFormat().format(product.price * 80)}</p>
           <Typography
             gutterBottom
-            variant="h5"
+            variant="h6"
             component="div"
-            className="card-title cursor-pointer hover:underline"
+            className="card-title"
             onClick={() => onProductClick(product.id)}
           >
             {product.title}
@@ -61,7 +61,8 @@ const ProductCard = ({ product }) => {
           </div>
         </CardContent>
         <CardActions className="card-btn" onClick={null}>
-        <ShoppingCartRoundedIcon /><p className="font-bold">Add to Cart</p>
+          <ShoppingCartRoundedIcon />
+          <p className="font-bold">Add to Cart</p>
         </CardActions>
       </Card>
     </>

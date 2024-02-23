@@ -2,19 +2,17 @@ import useProductContext from "../../hooks/useProductContext";
 import ProductCard from "./ProductCard";
 
 const ProductsList = () => {
-  const { products, isLoading, filterCategory } = useProductContext();
+  const { products, isLoading } = useProductContext();
+
   return (
     <>
       {isLoading && <p>Loading...</p>}
       <div className="grid-container my-4">
-        {filterCategory.length > 0
-          ? filterCategory.map((product) => (
+        {products
+          ? products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))
-          : products &&
-            products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          : null}
       </div>
     </>
   );

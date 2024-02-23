@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { priceFormat } from "../../utils/PriceFormat";
-import { Rating, Skeleton } from "@mui/material";
+import { Rating } from "@mui/material";
 import QuantityToggle from "./QuantityToggle";
 
 const ProductInfo = ({ prodInfo, isPending }) => {
@@ -17,7 +17,8 @@ const ProductInfo = ({ prodInfo, isPending }) => {
   }, [prodInfo?.stock, quantity]);
   return (
     <>
-      {!isPending && prodInfo ? (
+      {isPending && <p className="text-center">Loading...</p>}
+      {prodInfo ? (
         <div className="flex flex-col items-center md:items-start justify-center gap-2">
           <h2 className="font-extrabold text-xl">{prodInfo?.title}</h2>
           <p>
@@ -46,33 +47,7 @@ const ProductInfo = ({ prodInfo, isPending }) => {
             />
           </div>
         </div>
-      ) : (
-        <>
-          <Skeleton
-            variant="text"
-            animation="wave"
-            sx={{ fontSize: "1.25rem" }}
-            width="30%"
-          />
-          <Skeleton
-            variant="text"
-            animation="wave"
-            sx={{ fontSize: "1.25rem" }}
-            width="30%"
-          />
-          <Skeleton variant="text" animation="wave" width="20%" />
-          <Skeleton
-            variant="rounded"
-            animation="wave"
-            height={30}
-            sx={{ marginTop: 2, marginBottom: 2 }}
-          />
-          <Skeleton variant="text" animation="wave" width="20%" />
-          <Skeleton variant="text" animation="wave" width="20%" />
-          <Skeleton variant="text" animation="wave" width="20%" />
-          <Skeleton variant="text" animation="wave" width="20%" />
-        </>
-      )}
+      ) : null}
     </>
   );
 };

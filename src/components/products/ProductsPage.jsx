@@ -4,6 +4,7 @@ import SortingSection from "./SortingSection";
 import ProductsList from "./ProductsList";
 import { useGetProductCategoriesQuery } from "../../services/commonApi";
 import useFetchProductByCategory from "../../hooks/useFetchProductByCategory";
+import useProductContext from "../../hooks/useProductContext";
 
 const ProductsPage = () => {
   const { data, isFetching } = useGetProductCategoriesQuery();
@@ -11,17 +12,19 @@ const ProductsPage = () => {
   const [categorySelected, setCategorySelected] = useState("");
   const { getProductsByCategory, isFetching: fetchProdByCategory } =
     useFetchProductByCategory();
+  const { dispatch } = useProductContext();
 
   const onChange = useCallback(
     (index) => {
       setChecked(index === checked ? null : index);
+      dispatch({ type: "CATEGORY_CHANGED" });
       if (index !== checked) {
         setCategorySelected(data[index]);
       } else {
         setCategorySelected("");
       }
     },
-    [checked, data]
+    [checked, data, dispatch]
   );
 
   useEffect(() => {
@@ -30,7 +33,7 @@ const ProductsPage = () => {
   }, [categorySelected]);
   return (
     <>
-      <div className="border grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-5 gap-2">
         <div className="col-span-1">
           <FilterSection
             isFetching={isFetching}

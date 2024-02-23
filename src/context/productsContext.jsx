@@ -6,9 +6,10 @@ const ProductContext = createContext();
 
 const initialState = {
   products: [],
+  all_products: [],
   isLoading: false,
   trendingProducts: [],
-  filterCategory: [],
+  isCategoryChanged: false,
 };
 
 const ProductProvider = ({ children }) => {
@@ -23,10 +24,21 @@ const ProductProvider = ({ children }) => {
         payload: data.products,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isFetching]);
 
+  const filterProductReset = () => {
+    dispatch({ type: "FILTER_CATEGORY_RESET" });
+  };
+
+  const sorting = (type) => {
+    dispatch({ type: "SET_SORTING_DATA", payload: type });
+  };
+
   return (
-    <ProductContext.Provider value={{ ...state, dispatch }}>
+    <ProductContext.Provider
+      value={{ ...state, dispatch, filterProductReset, sorting }}
+    >
       {children}
     </ProductContext.Provider>
   );
