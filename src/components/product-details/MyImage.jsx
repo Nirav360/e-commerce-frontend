@@ -5,7 +5,7 @@ const MyImage = ({ imgs, isPending }) => {
   return (
     <>
       {isPending && <p className="text-center">Loading...</p>}
-      <div className="flex items-center gap-x-2 ml-2 md:ml-0">
+      <div className="flex items-center gap-x-2 ml-2 md:ml-0 cursor-pointer">
         {imgs?.images.map((element, index) => (
           <div key={index}>
             <img

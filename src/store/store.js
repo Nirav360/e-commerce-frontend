@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { commonApi } from "../services/commonApi";
+import cartReducer from "../slice/cartSlice";
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
+    cart: cartReducer,
     [commonApi.reducerPath]: commonApi.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,

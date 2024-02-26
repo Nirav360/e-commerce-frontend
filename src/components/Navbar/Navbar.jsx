@@ -4,15 +4,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import { Badge } from "@mui/material";
+import { useSelector } from "react-redux";
+import { cartProducts } from "../../slice/cartSlice";
 
-const pages = [
-  { name: "Home", link: "/home" },
-  { name: "Products", link: "/products" },
-  {
-    name: <ShoppingCartRoundedIcon />,
-    link: "/",
-  },
-];
 const styles = {
   logo: {
     marginRight: "auto",
@@ -23,6 +18,21 @@ const styles = {
 };
 function Navbar() {
   const navigate = useNavigate();
+  const cart = useSelector(cartProducts);
+  const cartLength = cart.length;
+  
+  const pages = [
+    { name: "Home", link: "/home" },
+    { name: "Products", link: "/products" },
+    {
+      name: (
+        <Badge badgeContent={cartLength} color="primary">
+          <ShoppingCartRoundedIcon />
+        </Badge>
+      ),
+      link: "/cart",
+    },
+  ];
   return (
     <AppBar position="static" color="transparent">
       <Toolbar variant="dense">

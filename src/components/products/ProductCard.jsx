@@ -5,12 +5,11 @@ import {
   CardMedia,
   Typography,
   CardActionArea,
-  CardActions,
   Rating,
 } from "@mui/material";
 import { priceFormat } from "../../utils/PriceFormat";
 import { useNavigate } from "react-router-dom";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import AddToCart from "./AddToCart";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -60,10 +59,8 @@ const ProductCard = ({ product }) => {
             <p>({ratingValue})</p>
           </div>
         </CardContent>
-        <CardActions className="card-btn" onClick={null}>
-          <ShoppingCartRoundedIcon />
-          <p className="font-bold">Add to Cart</p>
-        </CardActions>
+
+        <AddToCart type="card" product={product} />
       </Card>
     </>
   );

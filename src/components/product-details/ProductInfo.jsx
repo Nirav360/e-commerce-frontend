@@ -44,6 +44,7 @@ const ProductInfo = ({ prodInfo, isPending }) => {
               quantity={quantity}
               increment={handleIncrement}
               decrement={handleDecrement}
+              product={prodInfo}
             />
           </div>
         </div>
