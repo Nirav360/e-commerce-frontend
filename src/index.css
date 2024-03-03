@@ -92,4 +92,5 @@ body {
 
 img {
   mix-blend-mode: multiply;
+  object-fit: cover;
 }
