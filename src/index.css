@@ -6,7 +6,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  max-width: 100%;
 }
 
 html {
@@ -15,14 +14,16 @@ html {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  max-width: 100%;
 }
 
 .image {
-  background-image: url("./assets/banner.jpg");
-  background-size: cover;
+  /* background-image: url("./assets/banner.jpg");
+  background-size: cover; */
   /* or "contain" depending on what you want */
-  background-position: center;
-  background-repeat: no-repeat;
+  /* background-position: center;
+  background-repeat: no-repeat; */
+  background-color: lightblue;
   max-width: 100%;
   margin: 0.5rem;
 }
@@ -33,9 +34,16 @@ body {
 
 .text h2 {
   letter-spacing: 10px;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-weight: bolder;
   width: 150px;
+}
+
+@media screen and (width<= 768px) {
+  .text h2 {
+    letter-spacing: 5px;
+    font-size: 1rem;
+  }
 }
 
 .wrapper {
