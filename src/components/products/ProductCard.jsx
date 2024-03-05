@@ -7,7 +7,6 @@ import {
   CardActionArea,
   Rating,
 } from "@mui/material";
-import { priceFormat } from "../../utils/PriceFormat";
 import { useNavigate } from "react-router-dom";
 import AddToCart from "./AddToCart";
 
@@ -26,9 +25,14 @@ const ProductCard = ({ product }) => {
     () => round(product?.rating, 1),
     [product?.rating]
   );
+
+  const price = useMemo(() => {
+    const value = `₹${(product.price * 80).toLocaleString()}`;
+    return value;
+  }, [product?.price]);
   return (
     <>
-      <Card sx={{ width: 350, margin: "auto" }} elevation={8}>
+      <Card sx={{ width: 325, margin: "auto" }} elevation={8}>
         <CardActionArea onClick={() => onProductClick(product.id)}>
           <CardMedia
             component="img"
@@ -43,7 +47,7 @@ const ProductCard = ({ product }) => {
         </CardActionArea>
 
         <CardContent>
-          <p className="text-lg">{priceFormat().format(product.price * 80)}</p>
+          <p className="text-lg">{price}</p>
           <Typography
             gutterBottom
             variant="h6"
@@ -60,7 +64,7 @@ const ProductCard = ({ product }) => {
           </div>
         </CardContent>
 
-        <AddToCart type="card" product={product} />
+        <AddToCart type="card" product={product} quantity={1} />
       </Card>
     </>
   );

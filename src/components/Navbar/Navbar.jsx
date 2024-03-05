@@ -18,9 +18,9 @@ const styles = {
 };
 function Navbar() {
   const navigate = useNavigate();
-  const cart = useSelector(cartProducts);
-  const cartLength = cart.length;
-  
+  const { cartState } = useSelector(cartProducts);
+  const cartLength = cartState.length;
+
   const pages = [
     { name: "Home", link: "/home" },
     { name: "Products", link: "/products" },

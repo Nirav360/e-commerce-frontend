@@ -1,27 +1,49 @@
-import { useSelector } from "react-redux";
-import { cartProducts } from "../../slice/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addProductsInCart,
+  calculatePrice,
+  cartProducts,
+} from "../../slice/cartSlice";
 import CartTile from "./CartTile";
 import { Link } from "react-router-dom";
 import "./cart.css";
-
-const subtotal = 5000;
-const shippingCharges = 100;
-const tax = subtotal * 0.18;
-const total = subtotal + shippingCharges + tax;
+import { useEffect } from "react";
 
 const CartPage = () => {
-  const cartItems = useSelector(cartProducts);
-  console.log(cartItems);
+  const { cartState, subtotal, shippingCharges, tax, total } =
+    useSelector(cartProducts);
+  const dispatch = useDispatch();
+
+  const handleDecrement = (cartItem) => {
+    if (cartItem.quantity <= 1) return;
+    dispatch(
+      addProductsInCart({ ...cartItem, quantity: cartItem.quantity - 1 })
+    );
+  };
+
+  const handleIncrement = (cartItem) => {
+    if (cartItem.quantity >= cartItem.stock) return;
+    dispatch(
+      addProductsInCart({ ...cartItem, quantity: cartItem.quantity + 1 })
+    );
+  };
+
+  useEffect(() => {
+    if (cartState.length > 0) {
+      dispatch(calculatePrice());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartState]);
+
   return (
     <>
       <div className="cart">
         <main>
-          {cartItems.length > 0 ? (
-            cartItems.map((item, idx) => (
+          {cartState.length > 0 ? (
+            cartState.map((item, idx) => (
               <CartTile
-                // incrementHandler={incrementHandler}
-                // decrementHandler={decrementHandler}
-                // removeHandler={removeHandler}
+                incrementHandler={handleIncrement}
+                decrementHandler={handleDecrement}
                 key={idx}
                 cartItem={item}
               />
@@ -33,17 +55,17 @@ const CartPage = () => {
         <aside>
           <div className="bill">
             <h1>Billing Details</h1>
-            <p>Subtotal: ₹{subtotal}</p>
+            <p>Subtotal: ₹{subtotal.toLocaleString()}</p>
             <p>Shipping Charges: ₹{shippingCharges}</p>
-            <p>Tax: ₹{tax}</p>
+            <p>Tax: ₹{tax.toLocaleString()}</p>
             {/* <p>
-            Discount: <em className="red"> - ₹{discount}</em>
+            Discount: <em className="red"> - {discount}</em>
           </p> */}
             <p>
-              <b>Total: ₹{total}</b>
+              <b>Total: ₹{total.toLocaleString()}</b>
             </p>
 
-            {cartItems.length > 0 && <Link to="/shipping">Checkout</Link>}
+            {cartState.length > 0 && <Link to="/shipping">Checkout</Link>}
           </div>
         </aside>
       </div>

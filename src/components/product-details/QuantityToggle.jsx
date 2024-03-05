@@ -1,11 +1,15 @@
-import { AddRounded, RemoveRounded } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
 import AddToCart from "../products/AddToCart";
+import "./productDetails.css";
 
 const QuantityToggle = ({ quantity, increment, decrement, product }) => {
   return (
     <>
-      <div className="flex my-2 justify-center items-center border rounded-2xl">
+      <div className="quantity">
+        <button onClick={decrement}>-</button>
+        <p>{quantity}</p>
+        <button onClick={increment}>+</button>
+      </div>
+      {/* <div className="flex my-2 justify-center items-center border rounded-2xl">
         <IconButton size="small" color="inherit" onClick={increment}>
           <AddRounded />
         </IconButton>
@@ -13,9 +17,9 @@ const QuantityToggle = ({ quantity, increment, decrement, product }) => {
         <IconButton size="small" color="inherit" onClick={decrement}>
           <RemoveRounded />
         </IconButton>
-      </div>
+      </div> */}
 
-      <AddToCart type="button" product={product} />
+      <AddToCart type="button" product={product} quantity={quantity} />
     </>
   );
 };

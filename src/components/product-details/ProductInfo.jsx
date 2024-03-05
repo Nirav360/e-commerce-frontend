@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import { priceFormat } from "../../utils/PriceFormat";
 import { Rating } from "@mui/material";
 import QuantityToggle from "./QuantityToggle";
 
@@ -25,7 +24,7 @@ const ProductInfo = ({ prodInfo, isPending }) => {
             <Rating defaultValue={prodInfo?.rating} precision={0.5} readOnly />
           </p>
           <p className="font-bold">
-            MRP: {priceFormat().format(prodInfo?.price * 80)}
+            MRP: ₹{(prodInfo?.price * 80).toLocaleString()}
           </p>
           <p>{prodInfo?.description}</p>
           <div className="text-sm flex flex-col items-start justify-center gap-1 mt-1">

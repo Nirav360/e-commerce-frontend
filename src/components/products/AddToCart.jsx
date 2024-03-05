@@ -7,13 +7,17 @@ import { addProductsInCart } from "../../slice/cartSlice";
 function SlideTransition(props) {
   return <Slide {...props} direction="up" />;
 }
-const AddToCart = memo(({ type, product }) => {
+const AddToCart = memo(({ type, product, quantity }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   const handleAddCart = () => {
     setOpen(true);
-    dispatch(addProductsInCart(product));
+    const prod = {
+      ...product,
+      quantity: quantity,
+    };
+    dispatch(addProductsInCart(prod));
   };
 
   return (
