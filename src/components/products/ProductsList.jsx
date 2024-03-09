@@ -1,4 +1,5 @@
 import useProductContext from "../../hooks/useProductContext";
+import Spinner from "../spinner/Spinner";
 import ProductCard from "./ProductCard";
 
 const ProductsList = () => {
@@ -6,7 +7,7 @@ const ProductsList = () => {
 
   return (
     <>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Spinner />}
       <div className="grid-container my-4">
         {products
           ? products.map((product) => (

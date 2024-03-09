@@ -93,13 +93,29 @@ body {
   gap: 2rem;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (width < 768px) {
   .grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (width < 640px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
 img {
   mix-blend-mode: multiply;
   object-fit: cover;
+}
+
+@media screen and (width < 768px) {
+  .category-view {
+    display: none;
+  }
+}
+@media screen and (width > 768px) {
+  .menu-icon {
+    display: none;
+  }
 }

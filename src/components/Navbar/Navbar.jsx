@@ -11,6 +11,7 @@ import { cartProducts } from "../../slice/cartSlice";
 const styles = {
   logo: {
     marginRight: "auto",
+    cursor: "pointer"
   },
   menuButton: {
     marginLeft: "auto",
@@ -22,7 +23,6 @@ function Navbar() {
   const cartLength = cartState.length;
 
   const pages = [
-    { name: "Home", link: "/home" },
     { name: "Products", link: "/products" },
     {
       name: (
@@ -37,7 +37,7 @@ function Navbar() {
     <AppBar position="static" color="transparent">
       <Toolbar variant="dense">
         {/* Logo aligned to the left */}
-        <Typography variant="h6" component="div" sx={styles.logo}>
+        <Typography variant="h6" component="div" sx={styles.logo} onClick={()=> navigate("home")}>
           Logo
         </Typography>
 

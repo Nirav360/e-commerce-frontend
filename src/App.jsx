@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./components/login/LoginPage";
 import Layout from "./components/layout/Layout";
+import Spinner from "./components/spinner/Spinner";
 
 const ProductDetail = lazy(() =>
   import("./components/product-details/ProductDetail")
@@ -13,7 +14,7 @@ const CartPage = lazy(() => import("./components/cart/CartPage"));
 function App() {
   return (
     <div>
-      <Suspense fallback={"Loading..."}>
+      <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" exact element={<LoginPage />} />
           <Route element={<Layout />}>

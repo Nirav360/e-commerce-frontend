@@ -5,6 +5,7 @@ import ProductsList from "./ProductsList";
 import { useGetProductCategoriesQuery } from "../../services/commonApi";
 import useFetchProductByCategory from "../../hooks/useFetchProductByCategory";
 import useProductContext from "../../hooks/useProductContext";
+import Spinner from "../spinner/Spinner";
 
 const ProductsPage = () => {
   const { data, isFetching } = useGetProductCategoriesQuery();
@@ -34,7 +35,7 @@ const ProductsPage = () => {
   return (
     <>
       <div className="grid grid-cols-5 gap-2">
-        <div className="col-span-1">
+        <div className="md:col-span-1">
           <FilterSection
             isFetching={isFetching}
             checked={checked}
@@ -42,14 +43,14 @@ const ProductsPage = () => {
             handleChange={onChange}
           />
         </div>
-        <section className="col-span-4">
+        <section className="md:col-span-4 col-span-5">
           <div className="flex flex-col gap-2 mx-2">
             <div>
               <SortingSection category={categorySelected} />
             </div>
             <div>
               {fetchProdByCategory ? (
-                <p>Loading...</p>
+                <Spinner />
               ) : (
                 <ProductsList category={categorySelected} />
               )}

@@ -1,11 +1,12 @@
 import useProductContext from "../../hooks/useProductContext";
 import ProductCard from "../products/ProductCard";
+import Spinner from "../spinner/Spinner";
 
 const FeaturedProducts = () => {
   const { trendingProducts, isLoading } = useProductContext();
   return (
     <>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Spinner />}
       {trendingProducts.length > 0 && (
         <>
           <h1 className="md:text-4xl text-2xl font-extrabold mx-6 my-4">
