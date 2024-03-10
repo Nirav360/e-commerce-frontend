@@ -53,7 +53,7 @@ aside > .bill > h1 {
 aside > .bill > p {
   font-size: 1.1rem;
 }
-aside > .bill > a {
+.btn-style {
   background-color: blue;
   padding: 1rem;
   text-decoration: none;
@@ -67,7 +67,7 @@ aside > .bill > a {
   letter-spacing: 2px;
   border-radius: 5px;
 }
-aside > .bill > a:hover {
+.btn-style:hover {
   opacity: 0.8;
 }
 /* .cart > aside > span {

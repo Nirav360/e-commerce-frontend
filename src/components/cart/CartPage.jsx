@@ -94,7 +94,15 @@ const CartPage = () => {
                 ))}
               </TableBody>
             </Table>
-            {cartState.length > 0 && <Link to="/shipping">Checkout</Link>}
+            {cartState.length > 0 && (
+              <Link
+                to="/shipping"
+                className="btn-style"
+                onClick={() => dispatch(resetCart())}
+              >
+                Checkout
+              </Link>
+            )}
           </div>
         </aside>
       </div>

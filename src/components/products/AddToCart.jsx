@@ -1,4 +1,4 @@
-import { Alert, Button, CardActions, Slide, Snackbar } from "@mui/material";
+import { Alert, CardActions, Slide, Snackbar } from "@mui/material";
 import { useDispatch } from "react-redux";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import { memo, useState } from "react";
@@ -28,9 +28,9 @@ const AddToCart = memo(({ type, product, quantity }) => {
           <p className="font-bold">Add to Cart</p>
         </CardActions>
       ) : (
-        <Button variant="contained" onClick={handleAddCart}>
+        <button className="btn-style" onClick={handleAddCart}>
           Add to Cart
-        </Button>
+        </button>
       )}
       <Snackbar
         open={open}

@@ -6,6 +6,7 @@ import {
   Typography,
   CardActionArea,
   Rating,
+  Grow,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AddToCart from "./AddToCart";
@@ -32,40 +33,42 @@ const ProductCard = ({ product }) => {
   }, [product?.price]);
   return (
     <>
-      <Card sx={{ width: 325, margin: "auto" }} elevation={8}>
-        <CardActionArea onClick={() => onProductClick(product.id)}>
-          <CardMedia
-            component="img"
-            alt={product.title}
-            image={product.thumbnail}
-            sx={{
-              height: 150,
-              width: "100%",
-              objectFit: "cover",
-            }}
-          />
-        </CardActionArea>
+      <Grow in={true} unmountOnExit>
+        <Card sx={{ width: 325, margin: "auto" }} elevation={8}>
+          <CardActionArea onClick={() => onProductClick(product.id)}>
+            <CardMedia
+              component="img"
+              alt={product.title}
+              image={product.thumbnail}
+              sx={{
+                height: 150,
+                width: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </CardActionArea>
 
-        <CardContent>
-          <p className="text-lg">{price}</p>
-          <Typography
-            gutterBottom
-            variant="h6"
-            component="div"
-            className="card-title"
-            onClick={() => onProductClick(product.id)}
-          >
-            {product.title}
-          </Typography>
+          <CardContent>
+            <p className="text-lg">{price}</p>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              className="card-title"
+              onClick={() => onProductClick(product.id)}
+            >
+              {product.title}
+            </Typography>
 
-          <div className="flex">
-            <Rating defaultValue={product.rating} precision={0.5} readOnly />
-            <p>({ratingValue})</p>
-          </div>
-        </CardContent>
+            <div className="flex">
+              <Rating defaultValue={product.rating} precision={0.5} readOnly />
+              <p>({ratingValue})</p>
+            </div>
+          </CardContent>
 
-        <AddToCart type="card" product={product} quantity={1} />
-      </Card>
+          <AddToCart type="card" product={product} quantity={1} />
+        </Card>
+      </Grow>
     </>
   );
 };

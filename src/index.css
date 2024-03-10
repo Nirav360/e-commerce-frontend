@@ -19,23 +19,14 @@ body {
 }
 
 .image {
-  /* background-image: url("./assets/banner.jpg");
-  background-size: cover; */
-  /* or "contain" depending on what you want */
-  /* background-position: center;
-  background-repeat: no-repeat; */
   background-color: lightblue;
   max-width: 100%;
   margin: 0.5rem;
 }
 
-.text {
-  padding-top: 100px;
-}
-
 .text h2 {
-  letter-spacing: 10px;
-  font-size: 1.5rem;
+  letter-spacing: 0.5rem;
+  font-size: 2rem;
   font-weight: bolder;
   width: 150px;
 }
@@ -44,6 +35,7 @@ body {
   .text h2 {
     letter-spacing: 5px;
     font-size: 1rem;
+    margin: 1rem;
   }
 }
 
