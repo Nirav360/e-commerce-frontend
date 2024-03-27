@@ -26,6 +26,7 @@ const SortingDropdown = () => {
           value={sortBy}
           label="Sort By"
           onChange={handleChange}
+          name="sortBy"
         >
           <MenuItem value={"Price(LowToHigh)"}>Price: Low to High</MenuItem>
           <MenuItem value={"Price(HighToLow)"}>Price: High to Low</MenuItem>

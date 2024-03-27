@@ -5,7 +5,7 @@ const LoginPage = () => {
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
-        <div className="lg:w-1/3">
+        <div className="lg:w-1/3 md:w-1/2 w-3/4">
           <Card elevation={10} className="!bg-slate-100">
             <CardHeader title="Login" />
             <CardContent>

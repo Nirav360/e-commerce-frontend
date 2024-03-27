@@ -1,10 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addProductsInCart,
-  calculatePrice,
-  cartProducts,
-  resetCart,
-} from "../../slice/cartSlice";
+import { calculatePrice, cartProducts, resetCart } from "../../slice/cartSlice";
 import CartTile from "./CartTile";
 import { Link } from "react-router-dom";
 import "./cart.css";
@@ -27,20 +22,6 @@ const CartPage = () => {
     createData("Total", `₹${total.toLocaleString()}`),
   ];
 
-  const handleDecrement = (cartItem) => {
-    if (cartItem.quantity <= 1) return;
-    dispatch(
-      addProductsInCart({ ...cartItem, quantity: cartItem.quantity - 1 })
-    );
-  };
-
-  const handleIncrement = (cartItem) => {
-    if (cartItem.quantity >= cartItem.stock) return;
-    dispatch(
-      addProductsInCart({ ...cartItem, quantity: cartItem.quantity + 1 })
-    );
-  };
-
   useEffect(() => {
     if (cartState.length > 0) {
       dispatch(calculatePrice());
@@ -55,14 +36,7 @@ const CartPage = () => {
       <div className="cart">
         <main>
           {cartState.length > 0 ? (
-            cartState.map((item, idx) => (
-              <CartTile
-                incrementHandler={handleIncrement}
-                decrementHandler={handleDecrement}
-                key={idx}
-                cartItem={item}
-              />
-            ))
+            cartState.map((item, idx) => <CartTile key={idx} cartItem={item} />)
           ) : (
             <h1>No Items Added</h1>
           )}

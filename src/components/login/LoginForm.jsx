@@ -1,10 +1,10 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [formDetails, setFormDetails] = useState({
-    userName: "",
+    email: "",
     password: "",
   });
   const navigate = useNavigate();
@@ -21,9 +21,9 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { userName, password } = formDetails;
-    if (userName === "admin" && password === "admin") {
-      return navigate('/home')
+    const { email, password } = formDetails;
+    if (email === "admin" && password === "admin") {
+      return navigate("/home");
     }
     alert("Invalid Credentials!");
   };
@@ -35,12 +35,11 @@ const LoginForm = () => {
             <TextField
               required
               type="text"
-              label="Username"
-              name="userName"
+              label="Email"
+              name="email"
               fullWidth
-              autoComplete="username"
               onChange={handleChange}
-              value={formDetails.userName}
+              value={formDetails.email}
             />
           </div>
           <div>
@@ -60,6 +59,10 @@ const LoginForm = () => {
               Submit
             </Button>
           </div>
+          <p className="text-center">
+            Don&apos;t have an account?
+            <Link className="font-extrabold hover:underline">Register</Link>
+          </p>
         </div>
       </form>
     </>

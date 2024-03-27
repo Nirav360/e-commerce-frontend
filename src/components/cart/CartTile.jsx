@@ -1,11 +1,28 @@
 import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
-import { removeProductsFromCart } from "../../slice/cartSlice";
+import {
+  addProductsInCart,
+  removeProductsFromCart,
+} from "../../slice/cartSlice";
 
-const CartTile = ({ cartItem, incrementHandler, decrementHandler }) => {
+const CartTile = ({ cartItem }) => {
   const { thumbnail, id, title, quantity, price } = cartItem;
   const dispatch = useDispatch();
+
+  const handleDecrement = () => {
+    if (cartItem.quantity <= 1) return;
+    dispatch(
+      addProductsInCart({ ...cartItem, quantity: cartItem.quantity - 1 })
+    );
+  };
+
+  const handleIncrement = () => {
+    if (cartItem.quantity >= cartItem.stock) return;
+    dispatch(
+      addProductsInCart({ ...cartItem, quantity: cartItem.quantity + 1 })
+    );
+  };
 
   return (
     <>
@@ -17,9 +34,9 @@ const CartTile = ({ cartItem, incrementHandler, decrementHandler }) => {
         </article>
 
         <div>
-          <button onClick={() => decrementHandler(cartItem)}>-</button>
+          <button onClick={handleDecrement}>-</button>
           <p>{quantity}</p>
-          <button onClick={() => incrementHandler(cartItem)}>+</button>
+          <button onClick={handleIncrement}>+</button>
         </div>
 
         <button onClick={() => dispatch(removeProductsFromCart(id))}>

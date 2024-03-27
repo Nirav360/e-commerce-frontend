@@ -31,6 +31,7 @@ const FilterSection = (props) => {
                   <Checkbox
                     checked={i === checked}
                     onChange={() => handleChange(i)}
+                    name="categoryDrawer"
                   />
                 }
                 label={text}
@@ -53,6 +54,7 @@ const FilterSection = (props) => {
                   <Checkbox
                     checked={i === checked}
                     onChange={() => handleChange(i)}
+                    name="category"
                   />
                 }
                 label={categories}
