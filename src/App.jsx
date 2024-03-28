@@ -17,7 +17,8 @@ function App() {
     <div>
       <Suspense fallback={<Spinner />}>
         <Routes>
-          <Route path="/" exact element={<LoginPage />} />
+          <Route path="/" exact element={<LoginPage type={"login"} />} />
+          <Route path="/register" element={<LoginPage type={"register"} />} />
           <Route element={<Layout />}>
             <Route path="/home" element={<HomePage />} />
             <Route path="/product/:id" element={<ProductDetail />} />

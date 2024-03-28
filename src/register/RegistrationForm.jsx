@@ -1,13 +1,13 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const LoginForm = () => {
+const RegistrationForm = () => {
   const [formDetails, setFormDetails] = useState({
+    username: "",
     email: "",
     password: "",
   });
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,16 +21,24 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = formDetails;
-    if (email === "admin" && password === "admin") {
-      return navigate("/home");
-    }
-    alert("Invalid Credentials!");
+    console.log(formDetails);
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
+          <div>
+            <TextField
+              required
+              type="text"
+              label="Username"
+              name="username"
+              fullWidth
+              autoComplete="username"
+              onChange={handleChange}
+              value={formDetails.username}
+            />
+          </div>
           <div>
             <TextField
               required
@@ -61,9 +69,9 @@ const LoginForm = () => {
             </Button>
           </div>
           <p className="text-center">
-            Don&apos;t have an account?
-            <Link to={"register"} className="font-extrabold hover:underline">
-              Register
+            Have an account?{" "}
+            <Link to={"/"} className="font-extrabold hover:underline">
+              Log in
             </Link>
           </p>
         </div>
@@ -72,4 +80,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;
