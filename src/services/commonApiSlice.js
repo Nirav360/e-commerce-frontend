@@ -5,7 +5,7 @@ export const commonApiSlice = commonApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (payload) => ({
-        url: "auth",
+        url: "login",
         method: "POST",
         body: payload,
       }),

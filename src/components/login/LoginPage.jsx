@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
 import LoginForm from "./LoginForm";
-import RegistrationForm from "../../register/RegistrationForm";
+import RegistrationForm from "../register/RegistrationForm";
 
 const LoginPage = ({ type }) => {
   return (

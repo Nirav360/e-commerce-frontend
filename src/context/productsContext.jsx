@@ -1,6 +1,6 @@
 import { createContext, useEffect, useReducer } from "react";
 import reducer from "../reducer/productReducer";
-import { useGetProductsQuery } from "../services/commonApi";
+import { useGetProductsQuery } from "../services/commonApiSlice";
 
 const ProductContext = createContext();
 

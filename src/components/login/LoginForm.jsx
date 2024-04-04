@@ -1,13 +1,18 @@
-import { Button, TextField } from "@mui/material";
+import { Button, CircularProgress, TextField } from "@mui/material";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { setToken } from "../../slice/authSlice";
+import { useLoginMutation } from "../../services/commonApiSlice";
 
 const LoginForm = () => {
+  const [login, { isLoading }] = useLoginMutation();
   const [formDetails, setFormDetails] = useState({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,14 +24,22 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = formDetails;
-    if (email === "admin" && password === "admin") {
-      return navigate("/home");
+    try {
+      const response = await login(formDetails).unwrap();
+      dispatch(setToken({ accessToken: response.data.accessToken }));
+      setFormDetails({ email: "", password: "" });
+      navigate("/home");
+    } catch (err) {
+      console.log(err);
     }
-    alert("Invalid Credentials!");
+    // if (email === "admin" && password === "admin") {
+    //   return navigate("/home");
+    // }
+    // alert("Invalid Credentials!");
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -56,8 +69,14 @@ const LoginForm = () => {
             />
           </div>
           <div>
-            <Button type="submit" variant="contained" className="w-full">
-              Submit
+            <Button
+              type="submit"
+              variant="contained"
+              size="small"
+              className="w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? <CircularProgress size="1.5rem" /> : "Submit"}
             </Button>
           </div>
           <p className="text-center">
