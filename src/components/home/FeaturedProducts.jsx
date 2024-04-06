@@ -14,7 +14,7 @@ const FeaturedProducts = () => {
           </h1>
           <div className="grid-container my-4">
             {trendingProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product._id} product={product} />
             ))}
           </div>
         </>

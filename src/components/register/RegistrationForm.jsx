@@ -1,8 +1,16 @@
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useRegisterMutation } from "../../services/commonApiSlice";
+import Toast from "../snackbar/Toast";
 
 const RegistrationForm = () => {
+  const [register, { isLoading }] = useRegisterMutation();
+  const [openSnackbar, setOpenSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
   const [formDetails, setFormDetails] = useState({
     username: "",
     email: "",
@@ -19,12 +27,39 @@ const RegistrationForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formDetails);
+    try {
+      const response = await register(formDetails).unwrap();
+      setFormDetails({ email: "", password: "", username: "" });
+      setOpenSnackbar({
+        open: true,
+        message: response.message,
+        severity: "success",
+      });
+    } catch (err) {
+      setOpenSnackbar({
+        open: true,
+        message: err.data?.message ?? "No Server response",
+        severity: "error",
+      });
+    }
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar((prev) => ({ ...prev, open: false }));
   };
   return (
     <>
+      <Toast
+        open={openSnackbar.open}
+        handleClose={handleCloseSnackbar}
+        message={openSnackbar.message}
+        severity={openSnackbar.severity}
+      />
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
           <div>
@@ -64,8 +99,13 @@ const RegistrationForm = () => {
             />
           </div>
           <div>
-            <Button type="submit" variant="contained" className="w-full">
-              Submit
+            <Button
+              type="submit"
+              variant="contained"
+              className="w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? <CircularProgress size="1.5rem" /> : "Save"}
             </Button>
           </div>
           <p className="text-center">

@@ -6,16 +6,13 @@ import { customTheme } from "./customTheme.js";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";
-import { ProductProvider } from "./context/productsContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <BrowserRouter>
     <ThemeProvider theme={customTheme}>
       <Provider store={store}>
-        <ProductProvider>
-          <App />
-        </ProductProvider>
+        <App />
       </Provider>
     </ThemeProvider>
   </BrowserRouter>

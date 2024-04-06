@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import MyImage from "./MyImage";
 import ProductInfo from "./ProductInfo";
 import PageNavigation from "./PageNavigation";
-import { useGetSingleProductQuery } from "../../services/commonApi";
+import { useGetSingleProductQuery } from "../../services/commonApiSlice";
 
 const ProductDetail = () => {
   const { id } = useParams();

@@ -3,6 +3,14 @@ import { commonApi } from "./commonApi";
 
 export const commonApiSlice = commonApi.injectEndpoints({
   endpoints: (builder) => ({
+    register: builder.mutation({
+      query: (payload) => ({
+        url: "register",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+
     login: builder.mutation({
       query: (payload) => ({
         url: "login",
@@ -48,7 +56,7 @@ export const commonApiSlice = commonApi.injectEndpoints({
     }),
 
     getProducts: builder.query({
-      query: () => `products`,
+      query: () => `getProducts`,
     }),
 
     getSingleProduct: builder.query({
@@ -66,6 +74,7 @@ export const commonApiSlice = commonApi.injectEndpoints({
 });
 
 export const {
+  useRegisterMutation,
   useLoginMutation,
   useLogoutMutation,
   useRefreshMutation,

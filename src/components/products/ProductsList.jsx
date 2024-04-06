@@ -11,7 +11,7 @@ const ProductsList = () => {
       <div className="grid-container my-4">
         {products
           ? products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product._id} product={product} />
             ))
           : null}
       </div>

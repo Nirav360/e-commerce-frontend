@@ -4,9 +4,14 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setToken } from "../../slice/authSlice";
 import { useLoginMutation } from "../../services/commonApiSlice";
+import Toast from "../snackbar/Toast";
 
 const LoginForm = () => {
   const [login, { isLoading }] = useLoginMutation();
+  const [openSnackbar, setOpenSnackbar] = useState({
+    open: false,
+    message: "",
+  });
   const [formDetails, setFormDetails] = useState({
     email: "",
     password: "",
@@ -32,16 +37,27 @@ const LoginForm = () => {
       setFormDetails({ email: "", password: "" });
       navigate("/home");
     } catch (err) {
-      console.log(err);
+      setOpenSnackbar({
+        open: true,
+        message: err.data?.message ?? "No Server response",
+      });
     }
-    // if (email === "admin" && password === "admin") {
-    //   return navigate("/home");
-    // }
-    // alert("Invalid Credentials!");
   };
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar((prev) => ({ ...prev, open: false }));
+  };
   return (
     <>
+      <Toast
+        open={openSnackbar.open}
+        handleClose={handleCloseSnackbar}
+        message={openSnackbar.message}
+        severity={"error"}
+      />
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
           <div>

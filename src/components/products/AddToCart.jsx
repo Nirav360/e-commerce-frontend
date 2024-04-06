@@ -1,18 +1,17 @@
-import { Alert, CardActions, Slide, Snackbar } from "@mui/material";
+import { CardActions } from "@mui/material";
 import { useDispatch } from "react-redux";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import { memo, useState } from "react";
 import { addProductsInCart } from "../../slice/cartSlice";
+import Toast from "../snackbar/Toast";
+import "../cart/cart.css";
 
-function SlideTransition(props) {
-  return <Slide {...props} direction="up" />;
-}
 const AddToCart = memo(({ type, product, quantity }) => {
-  const [open, setOpen] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const dispatch = useDispatch();
 
   const handleAddCart = () => {
-    setOpen(true);
+    setOpenSnackbar(true);
     const prod = {
       ...product,
       quantity: quantity,
@@ -20,6 +19,12 @@ const AddToCart = memo(({ type, product, quantity }) => {
     dispatch(addProductsInCart(prod));
   };
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
   return (
     <>
       {type === "card" ? (
@@ -32,23 +37,12 @@ const AddToCart = memo(({ type, product, quantity }) => {
           Add to Cart
         </button>
       )}
-      <Snackbar
-        open={open}
-        onClose={() => setOpen(false)}
-        TransitionComponent={SlideTransition}
-        key={SlideTransition.name}
-        autoHideDuration={1200}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-        <Alert
-          onClose={() => setOpen(false)}
-          severity="success"
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          Product added in cart
-        </Alert>
-      </Snackbar>
+      <Toast
+        open={openSnackbar}
+        handleClose={handleCloseSnackbar}
+        message="Product added in cart"
+        severity={"success"}
+      />
     </>
   );
 });

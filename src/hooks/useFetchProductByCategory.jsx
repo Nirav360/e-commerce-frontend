@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGetProductsByCategoryQuery } from "../services/commonApi";
+import { useGetProductsByCategoryQuery } from "../services/commonApiSlice";
 import useProductContext from "./useProductContext";
 
 const useFetchProductByCategory = () => {

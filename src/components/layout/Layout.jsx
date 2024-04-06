@@ -1,3 +1,4 @@
+import { ProductProvider } from "../../context/productsContext";
 import Navbar from "../Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 
@@ -9,7 +10,9 @@ const Layout = () => {
           <Navbar />
         </div>
         <div className="h-[90%]">
-          <Outlet />
+          <ProductProvider>
+            <Outlet />
+          </ProductProvider>
         </div>
       </div>
     </>

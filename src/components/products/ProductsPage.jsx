@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import FilterSection from "./FilterSection";
 import SortingSection from "./SortingSection";
 import ProductsList from "./ProductsList";
-import { useGetProductCategoriesQuery } from "../../services/commonApi";
+import { useGetProductCategoriesQuery } from "../../services/commonApiSlice";
 import useFetchProductByCategory from "../../hooks/useFetchProductByCategory";
 import useProductContext from "../../hooks/useProductContext";
 import Spinner from "../spinner/Spinner";
