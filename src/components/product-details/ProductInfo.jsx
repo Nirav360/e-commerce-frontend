@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { Rating } from "@mui/material";
 import QuantityToggle from "./QuantityToggle";
 
-const ProductInfo = ({ prodInfo, isPending }) => {
+const ProductInfo = ({ prodInfo }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleDecrement = useCallback(() => {
@@ -16,7 +16,6 @@ const ProductInfo = ({ prodInfo, isPending }) => {
   }, [prodInfo?.stock, quantity]);
   return (
     <>
-      {isPending && <p className="text-center">Loading...</p>}
       {prodInfo ? (
         <div className="flex flex-col items-center md:items-start justify-center gap-2">
           <h2 className="font-extrabold text-xl">{prodInfo?.title}</h2>

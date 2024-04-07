@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-const MyImage = ({ imgs, isPending }) => {
+const MyImage = ({ imgs }) => {
   const [selectedImage, setSelectedImage] = useState("");
   return (
     <>
-      {isPending && <p className="text-center">Loading...</p>}
       <div className="flex items-center gap-x-2 ml-2 md:ml-0 cursor-pointer">
         {imgs?.images.map((element, index) => (
           <div key={index}>
@@ -13,7 +12,7 @@ const MyImage = ({ imgs, isPending }) => {
               alt={imgs?.title}
               style={{
                 borderRadius: 8,
-                alignItems: "center"
+                alignItems: "center",
               }}
               onClick={() => setSelectedImage(element)}
             />

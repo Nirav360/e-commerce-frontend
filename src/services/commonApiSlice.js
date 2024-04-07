@@ -60,15 +60,15 @@ export const commonApiSlice = commonApi.injectEndpoints({
     }),
 
     getSingleProduct: builder.query({
-      query: (id) => `products/${id}`,
+      query: (id) => `getProduct/${id}`,
     }),
 
     getProductCategories: builder.query({
-      query: () => `products/categories`,
+      query: () => `getProducts/categories`,
     }),
 
     getProductsByCategory: builder.query({
-      query: (param) => `products/category/${param}`,
+      query: (param) => `getProducts/category/${param}`,
     }),
   }),
 });

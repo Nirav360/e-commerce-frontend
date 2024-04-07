@@ -35,7 +35,7 @@ const ProductCard = ({ product }) => {
     <>
       <Grow in={true} unmountOnExit>
         <Card sx={{ width: 325, margin: "auto" }} elevation={8}>
-          <CardActionArea onClick={() => onProductClick(product.id)}>
+          <CardActionArea onClick={() => onProductClick(product._id)}>
             <CardMedia
               component="img"
               alt={product.title}
@@ -55,7 +55,7 @@ const ProductCard = ({ product }) => {
               variant="h6"
               component="div"
               className="card-title"
-              onClick={() => onProductClick(product.id)}
+              onClick={() => onProductClick(product._id)}
             >
               {product.title}
             </Typography>
