@@ -22,9 +22,7 @@ const ProductInfo = ({ prodInfo }) => {
           <p>
             <Rating defaultValue={prodInfo?.rating} precision={0.5} readOnly />
           </p>
-          <p className="font-bold">
-            MRP: ₹{(prodInfo?.price * 80).toLocaleString()}
-          </p>
+          <p className="font-bold">MRP: ₹{prodInfo?.price.toLocaleString()}</p>
           <p>{prodInfo?.description}</p>
           <div className="text-sm flex flex-col items-start justify-center gap-1 mt-1">
             <p>

@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
   );
 
   const price = useMemo(() => {
-    const value = `₹${(product.price * 80).toLocaleString()}`;
+    const value = `₹${product.price.toLocaleString()}`;
     return value;
   }, [product?.price]);
   return (

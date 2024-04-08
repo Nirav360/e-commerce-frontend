@@ -13,12 +13,17 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addProductsInCart: (state, action) => {
-      const { payload } = action;
-      const index = state.cartState.findIndex((i) => i.id === payload.id);
-      if (index !== -1) state.cartState[index] = payload;
-      else state.cartState.push(payload);
+      const cartPayload = action.payload;
+      // const index = state.cartState.findIndex((i) => i.id === payload.id);
+      // if (index !== -1) state.cartState[index] = payload;
+      // else state.cartState.push(payload);
       // if (state.cartState.some((val) => val.id === payload.id)) return; //condition to not add same products in cart which is present in it.
       // state.cartState = [...state.cartState, payload];
+      state.cartState = cartPayload.products;
+      state.subtotal = cartPayload.bill;
+      state.shippingCharges = 200;
+      state.tax = Math.round(state.subtotal * 0.18);
+      state.total = state.subtotal + state.tax + state.shippingCharges;
     },
     removeProductsFromCart: (state, action) => {
       state.cartState = state.cartState.filter((i) => i.id !== action.payload);
@@ -36,7 +41,7 @@ const cartSlice = createSlice({
           0
         );
       };
-      state.subtotal = calculateTotalSubtotal() * 80;
+      state.subtotal = calculateTotalSubtotal();
       state.shippingCharges = 200;
       state.tax = Math.round(state.subtotal * 0.18);
       state.total = state.subtotal + state.tax + state.shippingCharges;

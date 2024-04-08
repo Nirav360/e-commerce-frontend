@@ -1,4 +1,5 @@
 import { resetState, setToken } from "../slice/authSlice";
+import { addProductsInCart } from "../slice/cartSlice";
 import { commonApi } from "./commonApi";
 
 export const commonApiSlice = commonApi.injectEndpoints({
@@ -70,6 +71,32 @@ export const commonApiSlice = commonApi.injectEndpoints({
     getProductsByCategory: builder.query({
       query: (param) => `getProducts/category/${param}`,
     }),
+
+    createCart: builder.mutation({
+      query: (payload) => ({
+        url: "cart",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["Cart"],
+    }),
+
+    getCart: builder.mutation({
+      query: () => ({
+        url: "cart",
+        method: "GET",
+      }),
+      providesTags: ["Cart"],
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          const { cart } = data;
+          dispatch(addProductsInCart(cart));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
@@ -82,4 +109,6 @@ export const {
   useGetSingleProductQuery,
   useGetProductCategoriesQuery,
   useGetProductsByCategoryQuery,
+  useCreateCartMutation,
+  useGetCartMutation,
 } = commonApiSlice;

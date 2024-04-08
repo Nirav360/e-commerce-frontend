@@ -30,7 +30,7 @@ const CartTile = ({ cartItem }) => {
         <img src={`${thumbnail}`} alt={title} />
         <article>
           <Link to={`/product/${id}`}>{title}</Link>
-          <span>{`₹${(price * 80).toLocaleString()}`}</span>
+          <span>{`₹${price.toLocaleString()}`}</span>
         </article>
 
         <div>
