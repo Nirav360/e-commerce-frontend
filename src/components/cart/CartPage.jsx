@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./cart.css";
 import { useCallback, useEffect, useState } from "react";
 import { Table, TableBody, TableCell, TableRow } from "@mui/material";
-import { useGetCartMutation } from "../../services/commonApiSlice";
+import { useGetCartQuery } from "../../services/commonApiSlice";
 import Spinner from "../spinner/Spinner";
 import Toast from "../snackbar/Toast";
 
@@ -19,7 +19,10 @@ const CartPage = () => {
     open: false,
     message: "",
   });
-  const [getCart, { isLoading }] = useGetCartMutation();
+  const { isLoading, isError, error, isSuccess } = useGetCartQuery(undefined, {
+    // refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  });
   const dispatch = useDispatch();
 
   const createData = useCallback((name, price) => {
@@ -41,25 +44,34 @@ const CartPage = () => {
     createData("Total", `₹${total.toLocaleString()}`),
   ];
 
-  const fetchCart = async () => {
-    try {
-      const response = await getCart();
-      if (response.error) {
-        setOpenSnackbar({
-          open: true,
-          message: response.error.data?.message,
-        });
-        return;
-      }
-      // const { cart } = response.data;
-      // setCartDetails(cart);
-    } catch (error) {
-      setOpenSnackbar({
+  useEffect(() => {
+    if (isError)
+      return setOpenSnackbar({
         open: true,
         message: error?.data?.message ?? "No Server Response",
       });
-    }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError]);
+
+  // const fetchCart = async () => {
+  //   try {
+  //     const response = await getCart();
+  //     if (response.error) {
+  //       setOpenSnackbar({
+  //         open: true,
+  //         message: response.error.data?.message,
+  //       });
+  //       return;
+  //     }
+  //     // const { cart } = response.data;
+  //     // setCartDetails(cart);
+  //   } catch (error) {
+  //     setOpenSnackbar({
+  //       open: true,
+  //       message: error?.data?.message ?? "No Server Response",
+  //     });
+  //   }
+  // };
 
   // useEffect(() => {
   //   if (cartState.length > 0) {
@@ -70,10 +82,10 @@ const CartPage = () => {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [cartState]);
 
-  useEffect(() => {
-    fetchCart();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   fetchCart();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
@@ -94,8 +106,8 @@ const CartPage = () => {
       />
       <div className="cart">
         <main>
-          {cartState.length > 0 ? (
-            cartState.map((item, idx) => <CartTile key={idx} cartItem={item} />)
+          {cartState.length > 0 && isSuccess ? (
+            cartState.map((item) => <CartTile key={item._id} cartItem={item} />)
           ) : (
             <h1>No Items Added</h1>
           )}

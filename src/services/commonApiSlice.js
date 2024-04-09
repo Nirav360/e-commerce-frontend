@@ -17,6 +17,7 @@ export const commonApiSlice = commonApi.injectEndpoints({
         url: "login",
         method: "POST",
         body: payload,
+        credentials: "include",
       }),
     }),
 
@@ -24,11 +25,11 @@ export const commonApiSlice = commonApi.injectEndpoints({
       query: () => ({
         url: "logout",
         method: "POST",
+        credentials: "include",
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
-          const { data } = await queryFulfilled;
-          console.log(data);
+          await queryFulfilled;
           dispatch(resetState());
           setTimeout(() => {
             dispatch(commonApi.util.resetApiState());
@@ -43,11 +44,11 @@ export const commonApiSlice = commonApi.injectEndpoints({
       query: () => ({
         url: "refresh",
         method: "GET",
+        credentials: "include",
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          console.log(data);
           const { accessToken } = data;
           dispatch(setToken({ accessToken }));
         } catch (error) {
@@ -81,7 +82,7 @@ export const commonApiSlice = commonApi.injectEndpoints({
       invalidatesTags: ["Cart"],
     }),
 
-    getCart: builder.mutation({
+    getCart: builder.query({
       query: () => ({
         url: "cart",
         method: "GET",
@@ -97,6 +98,15 @@ export const commonApiSlice = commonApi.injectEndpoints({
         }
       },
     }),
+
+    deleteCart: builder.mutation({
+      query: (params) => ({
+        url: "cart",
+        method: "DELETE",
+        params: { itemId: params },
+      }),
+      invalidatesTags: ["Cart"],
+    }),
   }),
 });
 
@@ -110,5 +120,6 @@ export const {
   useGetProductCategoriesQuery,
   useGetProductsByCategoryQuery,
   useCreateCartMutation,
-  useGetCartMutation,
+  useGetCartQuery,
+  useDeleteCartMutation,
 } = commonApiSlice;

@@ -1,47 +1,24 @@
+import { memo } from "react";
 import { CardActions, CircularProgress } from "@mui/material";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
-import { memo, useState } from "react";
 import Toast from "../snackbar/Toast";
 import "../cart/cart.css";
-import { useCreateCartMutation } from "../../services/commonApiSlice";
+import useCreateCart from "../../hooks/useCreateCart";
 
 const AddToCart = memo(({ type, product, quantity }) => {
   // const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [createCart, { isLoading }] = useCreateCartMutation();
-  const [openSnackbar, setOpenSnackbar] = useState({
-    open: false,
-    message: "",
-    severity: "success",
-  });
+  const { onCreateCart, isLoading, openSnackbar, handleCloseSnackbar } =
+    useCreateCart();
 
-  const handleAddCart = async () => {
-    const prod = {
+  const handleAddCart = () => {
+    const payload = {
       itemId: product._id,
       quantity: quantity,
     };
-    try {
-      const response = await createCart(prod).unwrap();
-      setOpenSnackbar({
-        open: true,
-        message: response.message ?? "No Server response",
-        severity: "success",
-      });
-    } catch (err) {
-      setOpenSnackbar({
-        open: true,
-        message: err.data?.message ?? "No Server response",
-        severity: "error",
-      });
-    }
-    // dispatch(addProductsInCart(prod));
+
+    onCreateCart(payload);
   };
 
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenSnackbar((prev) => ({ ...prev, open: false }));
-  };
   return (
     <>
       {type === "card" ? (
