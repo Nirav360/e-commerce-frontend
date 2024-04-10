@@ -1,5 +1,5 @@
 import { resetState, setToken } from "../slice/authSlice";
-import { addProductsInCart } from "../slice/cartSlice";
+import { addProductsInCart, resetCart } from "../slice/cartSlice";
 import { commonApi } from "./commonApi";
 
 export const commonApiSlice = commonApi.injectEndpoints({
@@ -31,6 +31,7 @@ export const commonApiSlice = commonApi.injectEndpoints({
         try {
           await queryFulfilled;
           dispatch(resetState());
+          dispatch(resetCart());
           setTimeout(() => {
             dispatch(commonApi.util.resetApiState());
           }, 1000);
@@ -94,7 +95,9 @@ export const commonApiSlice = commonApi.injectEndpoints({
           const { cart } = data;
           dispatch(addProductsInCart(cart));
         } catch (error) {
-          console.log(error);
+          if (error?.error?.status === 404) {
+            dispatch(resetCart());
+          }
         }
       },
     }),
