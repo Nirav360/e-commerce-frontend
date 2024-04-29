@@ -17,7 +17,6 @@ export const commonApiSlice = commonApi.injectEndpoints({
         url: "login",
         method: "POST",
         body: payload,
-        credentials: "include",
       }),
     }),
 
@@ -25,7 +24,6 @@ export const commonApiSlice = commonApi.injectEndpoints({
       query: () => ({
         url: "logout",
         method: "POST",
-        credentials: "include",
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
@@ -45,7 +43,6 @@ export const commonApiSlice = commonApi.injectEndpoints({
       query: () => ({
         url: "refresh",
         method: "GET",
-        credentials: "include",
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
